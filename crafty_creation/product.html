@@ -1,0 +1,355 @@
+<!-- UPDATED product.html for Crafty Creations -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crafty Creations - Product</title>
+  <style>
+ body {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  background: linear-gradient(to bottom, #6e8c9d 0%, #ffe6f0 100%);
+  color: #333;
+}
+
+.navbar {
+  background: linear-gradient(90deg, #007f7f, #d6e9e0);
+  padding: 1rem;
+  text-align: center;
+}
+
+.navbar .logo {
+  font-family: 'Pacifico', cursive;
+  font-size: 2.2rem;
+  color: #290136;
+  letter-spacing: 1px;
+  text-shadow:
+    0 0 5px #e1bce1,
+    0 0 10px #edb2ed,
+   
+}
+
+
+.product-container {
+  max-width: 700px;
+  margin: 2rem auto;
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+  text-align: center;
+}
+
+.product-container img {
+  max-width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.price {
+  color: #d15a5a;
+  font-weight: bold;
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.similar-section {
+  max-width: 1000px;
+  margin: 3rem auto;
+  padding: 1rem;
+}
+
+.similar-title {
+  font-size: 1.6rem;
+  color: #4b0082;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+}
+
+.product-card {
+  background: #fffaf0;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  padding: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.product-card img {
+  width: 100%;
+  max-height: 140px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.product-card h4 {
+  margin: 0.5rem 0;
+  color: #333;
+}
+
+.product-card .price {
+  font-size: 1rem;
+  color: #d15a5a;
+}
+
+.navigation-section {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.back-button {
+  text-decoration: none;
+  font-size: 18px;
+  background-color: #ffdab9;
+  padding: 10px 18px;
+  border-radius: 8px;
+  color: #333;
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+.back-button:hover {
+  background-color: #ffc9a9;
+  color: #000;
+}
+
+.social-links a {
+  font-size: 18px;
+  text-decoration: none;
+  color: #4b0082;
+  padding: 8px 16px;
+  background-color: #fffacd;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+  font-weight: bold;
+}
+
+.social-links a:hover {
+  background-color: #ffe4b5;
+  color: #000;
+}
+
+
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div class="logo">your products!!</div>
+  </div>
+  <div class="product-container" id="productDetails"></div>
+  <div class="similar-section">
+    <div class="similar-title">Similar Products</div>
+    <div class="products-grid" id="similarProducts"></div>
+  </div>
+
+  <script>
+    const productGroups = {
+  
+      threadart: ['panda', 'emoji','SE' ,'kiss', 'heart','heartstringstand', 'butterfly', 'b1', 'b2', 'b3', 'leaf', 'paws','nazer'],
+      nameandimageart: ['Love', 'anushka', 'chuchu', 'mom'],
+      lamps:['Moonlamp','rainbowlamp'],
+      WALLDECOR: ['w1', 'w2', 'w3', 'w4','w5','w6','w7','w8','w9','w10','w11','w12','w13'],
+      namestring: ['harish', 'hema', 'hv', 'aniket', 'aarohi','gunnu','virat','reyansh'],
+       allarts: ['aarohi', 'aas1', 'aas2', 'aniket', 'AS', 'asname', 'B1', 'B2', 'B3',
+    'c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'CLOUD', 'CNAS', 'cutep1',
+    'G1', 'G2', 'G3', 'G4', 'G5', 'GAS', 'gunnu', 'h1', 'h2', 'h3', 'h4',
+    'h5', 'h6', 'h44', 'harish', 'heartstring', 'hema', 'hvname', 'i1',
+    'ias1', 'ias2', 'ias3', 'ias4', 'KISS', 'L', 'LF', 'LOVE1', 'ml',
+    'NAAZER', 'namebutter', 'p2', 'pandaartstring', 'PAW', 'pawheart',
+    'rainbowl', 'rayunsh', 'romie', 'S', 'sf1', 'sf2', 'sf3', 'SE',
+    'thread', 'virat', 'WD', 'wdbutt', 'WDC', 'WDD', 'WDE', 'wdflower',
+    'WDHOME', 'WDL', 'wdlady', 'WDP', 'WDSC', 'WDsquare', 'WDSS']
+    };
+
+    const allProducts = {
+       panda: { name: "Panda", price: "₹799", image: "image/PANDA ARTSTRING.jpg" },
+  emoji: { name: "Emoji", price: "₹299", image: "image/S.jpg" },
+  SE: { name: "Smile Emoji", price: "₹299", image: "image/SMILE EMOJI.jpg" },
+  kiss: { name: "Kiss Emoji", price: "₹299", image: "image/KISS EMOJI.jpg" },
+  heart: { name: "Heart Emoji", price: "₹349", image: "image/LOVE.jpg" },
+  heartstringstand: { name: "Heart String Stand", price: "₹499", image: "image/heartstring.jpg" },
+  butterfly: { name: "Butterfly with name", price: "₹399", image: "image/br.jpg" },
+  b1: { name: "B1", price: "₹349", image: "image/B1.jpg" },
+  b2: { name: "B2", price: "₹349", image: "image/B2.jpg" },
+  b3: { name: "B3", price: "₹349", image: "image/B3.jpg" },
+  leaf: { name: "Leaf", price: "₹399", image: "image/LF.jpg" },
+  paws: { name: "Paws", price: "₹359", image: "image/PAW.jpg" },
+  nazer: { name: "Naazer", price: "₹499", image: "image/NAAZER.jpg" },
+
+  Love: { name: "FAMILY...", price: "₹499", image: "image/CNAS.jpg" },
+  anushka: { name: "Anushka", price: "₹399", image: "image/ias2.jpg" },
+  chuchu: { name: "Chuchu", price: "₹449", image: "image/ias4.jpg" },
+  mom: { name: "Mom", price: "₹399", image: "image/ias3.jpg" },
+
+  Moonlamp: { name: "Moon Lamp", price: "₹399", image: "image/L.JPG" },
+  rainbowlamp: { name: "Rainbow Lamp", price: "₹359", image: "image/rainbowl.jpg" },
+
+  w1: { name: "W1", price: "₹499", image: "image/WDC.jpg" },
+  w2: { name: "W2", price: "₹509", image: "image/WDD.jpg" },
+  w3: { name: "W3", price: "₹519", image: "image/WDHOME.jpg" },
+  w4: { name: "W4", price: "₹529", image: "image/WDP.jpg" },
+  w5: { name: "W5", price: "₹529", image: "image/WD.jpg" },
+  w6: { name: "W6", price: "₹529", image: "image/WDSS.jpg" },
+  w7: { name: "W7", price: "₹529", image: "image/WDSC.jpg" },
+  w8: { name: "W8", price: "₹529", image: "image/wdbutt.jpg" },
+  w9: { name: "W9", price: "₹529", image: "image/WDE.jpg" },
+  w10: { name: "W10", price: "₹529", image: "image/WDL.jpg" },
+  w11: { name: "W11", price: "₹529", image: "image/WDSC.jpg" },
+  w12: { name: "W12", price: "₹529", image: "image/wdflower.jpg" },
+  w13: { name: "W13", price: "₹529", image: "image/wdlady.jpg" },
+
+  harish: { name: "Harish", price: "₹499", image: "image/harish.jpg" },
+  hema: { name: "Hema", price: "₹499", image: "image/hema.jpg" },
+  hv: { name: "HV", price: "₹499", image: "image/hvname.jpg" },
+  aniket: { name: "Aniket", price: "₹499", image: "image/aniket.jpg" },
+  aarohi: { name: "Aarohi", price: "₹499", image: "image/aarohi.jpg" },
+  gunnu: { name: "Gunnu", price: "₹499", image: "image/gunnu.jpg" },
+  virat: { name: "Virat", price: "₹459", image: "image/virat.jpg" },
+  reyansh: { name: "Reyansh", price: "₹499", image: "image/rayunsh.jpg" },
+
+   
+  aarohi: { name: "Aarohi", price: "₹499", image: "image/aarohi.jpg" },
+  aas1: { name: "AAS1", price: "₹499", image: "image/aas1.jpg" },
+  aas2: { name: "AAS2", price: "₹499", image: "image/aas2.jpg" },
+  aniket: { name: "Aniket", price: "₹499", image: "image/aniket.jpg" },
+  AS: { name: "AS", price: "₹499", image: "image/AS.jpg" },
+  asname: { name: "AS Name", price: "₹499", image: "image/asname.jpg" },
+  B1: { name: "B1", price: "₹349", image: "image/B1.jpg" },
+  B2: { name: "B2", price: "₹349", image: "image/B2.jpg" },
+  B3: { name: "B3", price: "₹349", image: "image/B3.jpg" },
+  c1: { name: "C1", price: "₹399", image: "image/c1.jpg" },
+  c2: { name: "C2", price: "₹399", image: "image/c2.jpg" },
+  c3: { name: "C3", price: "₹399", image: "image/c3.jpg" },
+  c4: { name: "C4", price: "₹399", image: "image/c4.jpg" },
+  c5: { name: "C5", price: "₹399", image: "image/c5.jpg" },
+  c6: { name: "C6", price: "₹399", image: "image/c6.jpg" },
+  c7: { name: "C7", price: "₹399", image: "image/c7.jpg" },
+  c8: { name: "C8", price: "₹399", image: "image/c8.jpg" },
+  CLOUD: { name: "Cloud", price: "₹449", image: "image/CLOUD.jpg" },
+  CNAS: { name: "Custom Name Art String", price: "₹499", image: "image/CNAS.jpg" },
+  cutep1: { name: "Cute P1", price: "₹399", image: "image/cutep1.jpg" },
+  G1: { name: "G1", price: "₹459", image: "image/G1.jpg" },
+  G2: { name: "G2", price: "₹459", image: "image/G2.jpg" },
+  G3: { name: "G3", price: "₹459", image: "image/G3.jpg" },
+  G4: { name: "G4", price: "₹459", image: "image/G4.jpg" },
+  G5: { name: "G5", price: "₹459", image: "image/G5.jpg" },
+  GAS: { name: "GAS", price: "₹459", image: "image/GAS.jpg" },
+  gunnu: { name: "Gunnu", price: "₹449", image: "image/gunnu.jpg" },
+  h1: { name: "H1", price: "₹399", image: "image/h1.jpg" },
+  h2: { name: "H2", price: "₹399", image: "image/h2.jpg" },
+  h3: { name: "H3", price: "₹399", image: "image/h3.jpg" },
+  h4: { name: "H4", price: "₹399", image: "image/h4.jpg" },
+  h5: { name: "H5", price: "₹399", image: "image/h5.jpg" },
+  h6: { name: "H6", price: "₹399", image: "image/h6.jpg" },
+  h44: { name: "H44", price: "₹399", image: "image/h44.jpg" },
+  harish: { name: "Harish", price: "₹499", image: "image/harish.jpg" },
+  heartstring: { name: "Heart String", price: "₹499", image: "image/heartstring.jpg" },
+  hema: { name: "Hema", price: "₹499", image: "image/hema.jpg" },
+  hvname: { name: "HV Name", price: "₹499", image: "image/hvname.jpg" },
+  i1: { name: "I1", price: "₹399", image: "image/i1.jpg" },
+  ias1: { name: "IAS1", price: "₹449", image: "image/ias1.jpg" },
+  ias2: { name: "IAS2", price: "₹449", image: "image/ias2.jpg" },
+  ias3: { name: "IAS3", price: "₹449", image: "image/ias3.jpg" },
+  ias4: { name: "IAS4", price: "₹449", image: "image/ias4.jpg" },
+  KISS: { name: "Kiss Emoji", price: "₹299", image: "image/KISS EMOJI.jpg" },
+  L: { name: "Moon Lamp", price: "₹399", image: "image/L.JPG" },
+  LF: { name: "LF", price: "₹399", image: "image/LF.jpg" },
+  LOVE1: { name: "Love 1", price: "₹449", image: "image/LOVE1.jpg" },
+  ml: { name: "ML", price: "₹399", image: "image/ml.jpg" },
+  NAAZER: { name: "Naazer", price: "₹499", image: "image/NAAZER.jpg" },
+  namebutter: { name: "Name with Butterfly", price: "₹499", image: "image/name butter.jpg" },
+  p2: { name: "P2", price: "₹399", image: "image/p2.jpg" },
+  pandaartstring: { name: "Panda Art String", price: "₹799", image: "image/panda artstring.jpg" },
+  PAW: { name: "Paw", price: "₹359", image: "image/PAW.jpg" },
+  pawheart: { name: "Paw Heart", price: "₹359", image: "image/pawheart.jpg" },
+  rainbowl: { name: "Rainbow Lamp", price: "₹359", image: "image/rainbowl.jpg" },
+  rayunsh: { name: "Rayunsh", price: "₹459", image: "image/rayunsh.jpg" },
+  romie: { name: "Romie", price: "₹459", image: "image/romie.jpg" },
+  S: { name: "S", price: "₹299", image: "image/S.jpg" },
+  sf1: { name: "SF1", price: "₹399", image: "image/sf1.jpg" },
+  sf2: { name: "SF2", price: "₹399", image: "image/sf2.jpg" },
+  sf3: { name: "SF3", price: "₹399", image: "image/sf3.jpg" },
+  SE: { name: "Smile Emoji", price: "₹299", image: "image/SMILE EMOJI.jpg" },
+  thread: { name: "Thread", price: "₹399", image: "image/thread.jpg" },
+  virat: { name: "Virat", price: "₹459", image: "image/virat.jpg" },
+  WD: { name: "WD", price: "₹499", image: "image/WD.jpg" },
+  wdbutt: { name: "WD Butterfly", price: "₹499", image: "image/wdbutt.jpg" },
+  WDC: { name: "WDC", price: "₹499", image: "image/WDC.jpg" },
+  WDD: { name: "WDD", price: "₹499", image: "image/WDD.jpg" },
+  WDE: { name: "WDE", price: "₹499", image: "image/WDE.jpg" },
+  wdflower: { name: "WD Flower", price: "₹499", image: "image/wdflower.jpg" },
+  WDHOME: { name: "WD Home", price: "₹499", image: "image/WDHOME.jpg" },
+  WDL: { name: "WDL", price: "₹499", image: "image/WDL.jpg" },
+  wdlady: { name: "WD Lady", price: "₹499", image: "image/wdlady.jpg" },
+  WDP: { name: "WDP", price: "₹499", image: "image/WDP.jpg" },
+  WDSC: { name: "WDSC", price: "₹499", image: "image/WDSC.jpg" },
+  WDsquare: { name: "WD Square", price: "₹499", image: "image/WDsqURAE.jpg" },
+  WDSS: { name: "WDSS", price: "₹499", image: "image/WDSS.jpg" }
+};
+
+    const params = new URLSearchParams(window.location.search);
+    const currentItem = params.get("item");
+    const category = params.get("category");
+
+    const mainProduct = allProducts[currentItem];
+   if (mainProduct) {
+  document.getElementById("productDetails").innerHTML = `
+    <img src="${mainProduct.image}" alt="${mainProduct.name}" />
+    <h2>${mainProduct.name}</h2>
+    <div class="price">${mainProduct.price}</div>
+
+    <!-- Add this part below -->
+    <div class="social-links">
+      <a href="mailto:craftycreations2309@gmail.com" target="_blank" title="Email">📧 Email</a>
+      <a href="https://www.instagram.com/srujana._.shetty_/" target="_blank" title="Instagram">📷 Instagram</a>
+    </div>
+  `;
+}
+
+
+    if (productGroups[category]) {
+      const similarDiv = document.getElementById("similarProducts");
+      productGroups[category].forEach(key => {
+        if (key !== currentItem && allProducts[key]) {
+          const prod = allProducts[key];
+          const card = document.createElement("a");
+          card.href = `product.html?item=${key}&category=${category}`;
+          card.className = "product-card";
+          card.innerHTML = `
+            <img src="${prod.image}" alt="${prod.name}" />
+            <h4>${prod.name}</h4>
+            <div class="price">${prod.price}</div>
+          `;
+          similarDiv.appendChild(card);
+        }
+      });
+    }
+  </script>
+  <!-- Back Button and Social Links -->
+<div class="navigation-section">
+  <a href="index.html" class="back-button">⬅ Back</a>
+
+    </a>
+  </div>
+</div>
+
+</body>
+</html>
